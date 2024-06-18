@@ -1,5 +1,5 @@
 import NewsList from "@/components/news-list";
-import { getAvailableNewsYears, getNewsForYear } from "@/lib/news";
+import { getAvailableNewsMonths, getAvailableNewsYears, getNewsForYear } from "@/lib/news";
 import Link from "next/link";
 
 export default function FilteresNewsPage({ params }) {
@@ -20,6 +20,10 @@ export default function FilteresNewsPage({ params }) {
   }
 
   const links = getAvailableNewsYears();
+
+  if (selectedYear && !getAvailableNewsYears().includes(+selectedYear) || selectedMonth && !getAvailableNewsMonths(selectedMonth).includes(+selectedMonth)) {
+    throw new Error("Invalid filter")
+  }
 
   return (
     <>

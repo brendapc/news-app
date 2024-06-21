@@ -3,6 +3,8 @@ import { getAllNews } from "@/lib/news";
 export default async function NewsPage() {
   const news = await getAllNews();
 
+  if (!news) notFound()
+
   return (
     <div>
       <h1>News Page</h1>

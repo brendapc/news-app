@@ -1,13 +1,13 @@
-import { DUMMY_NEWS } from "@/dummy-news";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getNewsItem } from "@/lib/news";
 
-export default function NewPage({ params }) {
+export default async function NewPage({ params }) {
   const newsSlug = params.slug;
-  const newsItem = DUMMY_NEWS.find((news) => news.slug === newsSlug);
- 
+  const newsItem = await getNewsItem(newsSlug)
+
   if (!newsItem) notFound()
- 
+
   return (
     <article className="news-article">
       <header>
